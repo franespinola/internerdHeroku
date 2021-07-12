@@ -5,15 +5,21 @@ const productsRoutes = require('./src/routes/products');
 const usersRoutes = require('./src/routes/users')
 const methodOverride=require('method-override');
 app.use('/public', express.static(__dirname + '/public'));
+
+app.listen(process.env.PORT || 3000, function(){
+    console.log("Servidor corriendo");
+});
+
 app.use(express.urlencoded({extended:false}));
 app.use(methodOverride('_method'));
 app.use(methodOverride('_METHOD'));
 app.use('', mainRoutes);
 app.use('/users', usersRoutes);
 app.use('/products', productsRoutes);
-app.listen(3000);
 app.set('view engine', 'ejs');
 app.set('views','./src/views');
+
+
 
 
 //trabajando con POST//
