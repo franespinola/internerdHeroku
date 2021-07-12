@@ -4,7 +4,7 @@ const mainRoutes = require('./src/routes/main');
 const productsRoutes = require('./src/routes/products');
 const usersRoutes = require('./src/routes/users')
 const methodOverride=require('method-override');
-
+app.use('/Public', express.static(__dirname + '/Public'));
 app.listen(process.env.PORT || 3000, function(){
     console.log("Servidor corriendo");
 });
