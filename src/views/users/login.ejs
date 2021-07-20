@@ -7,14 +7,20 @@
         <%- include('../partials/header')%>
             <h2>Ingresar</h2>
             <section class="section">
-                <form class="section form">
+                <form class="section form" action="login" method="POST">
                     <div class="campo">
-                        <label for="nombre">Nombre:</label>
-                        <input type="text" name="nombre" placeholder="Nombre" />
+                        <label for="email">Correo Electronico</label>
+                        <input type="text" name="email" placeholder="ingrese email" value="<%=locals.oldData?oldData.email:null%>"/>
+                        <% if(locals.errors && errors.email) {%> 
+                            <p class="validationProfile"><%= errors.email.msg %></p> 
+                        <% } %> 
                     </div>
                     <div class="campo">
-                        <label for="apellidos">Apellidos:</label>
-                        <input type="text" name="apellidos" placeholder="Apellidos" />
+                        <label for="contrasena">Contraseña</label>
+                        <input type="password" name="contrasena" placeholder="Apellidos" value="<%=locals.oldData?oldData.contrasena:null%>"/>
+                        <% if(locals.errors && errors.contrasena) {%> 
+                            <p class="validationProfile"><%= errors.contrasena.msg %></p> 
+                        <% } %> 
                     </div>
                     <button type="submit" class="btn">Ingresar</button>
                     <a href="/users/signup" class="cuenta">

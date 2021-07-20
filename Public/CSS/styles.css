@@ -343,7 +343,10 @@ button {
     border-radius: 0.5rem;
     border: 1px solid black;
 }
-
+#avatar{
+    margin-top: 5px;
+    
+}
 .contenedor-btn {
     display: flex;
     flex-direction: column;
@@ -610,6 +613,7 @@ select {
     .form a {
         width: 40%;
         align-self: center;
+        margin-top: -20px;  /*agregue*/
     }
     .form {
         align-items: center;

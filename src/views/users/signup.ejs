@@ -7,26 +7,49 @@
 
             <h2>Registrarme</h2>
             <section class="section">
-                <form class="section form">
+                <form class="section form" action="signup" method="POST" enctype="multipart/form-data">
                     <div class="campo">
                         <label for="nombre">Nombre:</label>
-                        <input type="text" name="nombre" placeholder="Nombre" />
+                        <input type="text" name="nombre" placeholder="Nombre" value="<%=locals.oldData?oldData.nombre:null%>" />
+                        <% if(locals.errors && errors.nombre) {%>
+                            <p class="validationProfile"><%= errors.nombre.msg %></p> 
+                            <% } %>  
                     </div>
                     <div class="campo">
                         <label for="apellidos">Apellidos:</label>
-                        <input type="text" name="apellidos" placeholder="Apellidos" />
+                        <input type="text" name="apellido" placeholder="Apellidos" value="<%=locals.oldData?oldData.apellido:null%>"/>
+                        <% if(locals.errors && errors.apellido) {%>
+                            <p class="validationProfile"><%= errors.apellido.msg %></p> 
+                            <% } %>  
                     </div>
                     <div class="campo">
                         <label for="email">Email:</label>
-                        <input type="email" name="email" placeholder="Email" />
+                        <input type="email" name="email" placeholder="Email" value="<%=locals.oldData?oldData.email:null%>"/>
+                        <% if(locals.errors && errors.email) {%> 
+                            <p class="validationProfile"><%= errors.email.msg %></p> 
+                        <% } %> 
                     </div>
                     <div class="campo">
-                        <label for="contraseña">Contraseña:</label>
-                        <input type="password" name="contraseña" placeholder="Contraseña" />
+                        <label for="contrasena">Contraseña:</label>
+                        <input type="password" name="contrasena" placeholder="Contraseña" value="<%=locals.oldData?oldData.contrasena:null%>"/>
+                        <% if(locals.errors && errors.contrasena) {%> 
+                            <p class="validationProfile"><%= errors.contrasena.msg %></p> 
+                        <% } %> 
                     </div>
                     <div class="campo">
                         <label for="confirmacion">Confirmación de contraseña:</label>
-                        <input type="password" name="confirmacion" placeholder="Confirmar" />
+                        <input type="password" name="confirmacion" placeholder="Confirmar" value="<%=locals.oldData?oldData.confirmacion:null%>" />
+                        <% if(locals.errors && errors.confirmacion) {%> 
+                            <p class="validationProfile"><%= errors.confirmacion.msg %></p> 
+                        <% } %> 
+                    </div>
+                    <div class="campo">
+                        <label for="avatar">Su Avatar</label>
+                        <input type="file" name="avatar" >
+                        <% if(locals.errors && errors.avatar) { %>
+                            <p class="validationProfile"><%= errors.avatar.msg %></p>  
+                        <% } %> 
+                        <img src="/Public/img/Avatar.svg" height="40px" alt="imagen avatar usuario" id="avatar"/>
                     </div>
                     <button type="submit" class="btn">Resgístrame</button>
                     <a href="/users/login" class="cuenta">

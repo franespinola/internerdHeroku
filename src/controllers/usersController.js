@@ -1,10 +1,16 @@
 //requiriendo express validator//
+const bcryptjs=require('bcryptjs')
 const { validationResult } = require("express-validator");
 const fs = require("fs");
 const path = require("path");
 
-const usersFilePath = path.join(__dirname, "../data/users.json");
+const usersFilePath = path.resolve(__dirname, "../data/users.json");
+console.log(__dirname)
 const users = JSON.parse(fs.readFileSync(usersFilePath, "utf-8"));
+
+const User=require("../models/User");
+
+
 
 const toThousand = (n) => n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
 //----------------------------//
@@ -44,5 +50,67 @@ const usersController = {
       return res.redirect("/")
     }
   },
+  signupPost: (req, res) => {
+    const resultValidation = validationResult(req);
+    //console.log(resultValidation)
+    if (resultValidation.errors.length > 0) {
+      return res.render("users/signup", {
+        errors: resultValidation.mapped(),
+        pageTitle: "Registro",
+        oldData: req.body
+      });
+      }
+    let userInDB=User.findByField('email',req.body.email);
+    if(userInDB){
+      return res.render("users/signup",{
+        pageTitle:"Registro",
+        errors:{
+          email:{
+            msg:'Este email ya está registrado'
+          }
+        },
+        oldData:req.body
+      });
+    }
+    let userToCreate={          
+      ...req.body,
+      pageTitle: "Registro",
+      avatar:req.file.filename,
+      contrasena:bcryptjs.hashSync(req.body.contrasena,10),
+      confirmacion:bcryptjs.hashSync(req.body.confirmacion,10)
+
+    }
+    let userCreated=User.create(userToCreate);    
+    return res.redirect("/users/login")
+    
+  },
+  loginProcess:(req,res)=>{
+    /*const resultValidation = validationResult(req);
+    //console.log(resultValidation)
+    if (resultValidation.errors.length > 0) {
+      return res.render("users/login", {
+        errors: resultValidation.mapped(),
+        pageTitle: "login",
+        oldData: req.body
+      });
+      }else{
+        return res.send(req.body)
+      }*/
+      let userToLogin=User.findByField('email',req.body.email)
+      if(userToLogin){
+        let isOkThePassword=bcryptjs.compareSync(req.body.contrasena,userToLogin.contrasena)
+        if(isOkThePassword){
+          return res.redirect('/users/profile/') //aca va la vista (hay q crearla)
+        }
+      }
+      return res.render("users/login",{
+        pageTitle:"Login",
+        errors:{
+          email:{
+            msg:'Las credenciales son inválidas'
+          }
+        }
+      });
+  }
 };
 module.exports = usersController;
