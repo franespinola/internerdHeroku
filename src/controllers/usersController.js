@@ -99,8 +99,10 @@ const usersController = {
       let userToLogin=User.findByField('email',req.body.email)
       if(userToLogin){
         let isOkThePassword=bcryptjs.compareSync(req.body.contrasena,userToLogin.contrasena)
-        if(isOkThePassword){
-          return res.redirect('/users/profile/') //aca va la vista (hay q crearla)
+          if(isOkThePassword){
+            delete userToLogin.contrasena;
+            req.session.userLogged=userToLogin
+            return res.redirect('/users/profile/') //aca va la vista (hay q crearla)
         }
       }
       return res.render("users/login",{
