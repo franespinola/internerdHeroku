@@ -30,8 +30,17 @@ const usersController = {
     res.render("users/profile", {
       pageTitle: "Perfil",
       id: req.params.id,
-      usuario: users.find(x => x.id== req.params.id)
+      usuario: users.find(x => x.id== req.params.id),
+      user:req.session.userLogged
+
     });
+  },
+  logout:(req,res)=>{                          //metodo del logout
+    req.session.destroy();
+    return res.redirect('/')
+
+
+
   },
   edit: (req, res) => {
     res.render("users/editUser", {
@@ -100,7 +109,7 @@ const usersController = {
       if(userToLogin){
         let isOkThePassword=bcryptjs.compareSync(req.body.contrasena,userToLogin.contrasena)
           if(isOkThePassword){
-            delete userToLogin.contrasena;
+            delete userToLogin.contrasena;    //elimino la contraseña para q no me aparezca en mi profile
             req.session.userLogged=userToLogin
             return res.redirect('/users/profile/') //aca va la vista (hay q crearla)
         }

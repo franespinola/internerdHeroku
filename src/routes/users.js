@@ -2,8 +2,10 @@ const express = require('express');
 const router = express.Router();
 const multer = require('multer');
 const path = require('path')
+const guestMiddleware = require('../middlewares/guestMiddleware')  //llamo al middleware de login y registro
+const authMiddleware = require('../middlewares/authMiddleware')  //llamo al middleware de profile
 
-
+//middleware para multer(crear archivo en carpeta multer y requerirlo en la ruta users.js)
 const multerDS = multer.diskStorage({
     destination: function(req, file, cb) {       // request, archivo y callback que almacena archivo en destino
      cb(null, path.join(__dirname,'../../Public/img/users_img'));    //Ruta donde almacenamos el archivo, si uso servidor puedo poner la ruta de mi servidor ejmplo www.miservidor.com
@@ -19,7 +21,8 @@ const usersController = require('../controllers/usersController')
 //agrego express-validator//
 const{body}=require('express-validator');
 const { Router } = require('express');
-//Validaciones//
+
+//Validacion para la edicion hacer lo mismo q con multer crear archivo en middleware de validacion y luego requerirlo aca//
 const validationForm=[
     body('nombre').notEmpty().withMessage('*Ingrese su nombre'),
     body('apellido').notEmpty().withMessage('*Ingrese su apellido'),
@@ -32,7 +35,7 @@ const validationForm=[
     body('confirmacion2').isLength({min:5,max:15}).withMessage('*Ingrese contraseña válida'),
     
 ]
-
+//Validacion para el registro hacer lo mismo q con multer crear archivo en middleware de validacion y luego requerirlo aca//
 const validationFormSignUp=[
     body('nombre').notEmpty().withMessage('*Ingrese su nombre'),
     body('apellido').notEmpty().withMessage('*Ingrese su apellido'),
@@ -56,7 +59,7 @@ const validationFormSignUp=[
         return true;
     })
 ]
-
+//validacion del login (falta terminar)
 const validationLogin=[
 body('email')
     .notEmpty().withMessage('*Debe ingresar su casilla de correo electrónico').bail()
@@ -64,13 +67,17 @@ body('email')
 body('contrasena').isLength({min:5,max:15}).withMessage('*Ingrese contraseña válida (entre 5 y 15 caracteres)'),
 ]
 
-router.get('/login', usersController.login);
-router.get('/signup', usersController.signup);
-router.get('/profile/:id', usersController.profile);
+router.get('/login',guestMiddleware,usersController.login);
+router.get('/signup',guestMiddleware,usersController.signup);
+router.get('/profile/',authMiddleware,usersController.profile);
 // rutas edicion perfil//
 router.get('/edit',usersController.edit);
 router.put('/edit',validationForm,usersController.editPut);
 //-------------------------//
 router.post('/signup',uploadFile.single('avatar'),validationFormSignUp,usersController.signupPost)
 router.post('/login',validationLogin,usersController.loginProcess);
+
+//--logout--//
+router.get('/logout/',usersController.logout);
+
 module.exports = router;
