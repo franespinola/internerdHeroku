@@ -17,7 +17,7 @@
                     </div>
                     <div class="campo">
                         <label for="contrasena">Contraseña</label>
-                        <input type="password" name="contrasena" placeholder="Contrasena" value="<%=locals.oldData?oldData.contrasena:null%>"/>
+                        <input type="password" name="contrasena" placeholder="Contraseña" value="<%=locals.oldData?oldData.contrasena:null%>"/>
                         <% if(locals.errors && errors.contrasena) {%> 
                             <p class="validationProfile"><%= errors.contrasena.msg %></p> 
                         <% } %> 
