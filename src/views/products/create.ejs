@@ -8,20 +8,20 @@
             <section class="section">
                 <form method="POST" action="create" enctype="multipart/form-data">
                     <div class="campo">
-                        <label for="nombreProducto">Nombre de producto</label>
-                        <input type="text" name="nombreProducto">
+                        <label for="name">Nombre de producto</label>
+                        <input type="text" name="name">
                     </div>
                     <div class="campo">
-                        <label for="descripcion">Descripción</label>
-                        <textarea name="descripcion"></textarea>
+                        <label for="description">Descripción</label>
+                        <textarea name="description"></textarea>
                     </div>
                     <div class="campo">
-                        <label for="imagen">Imagen</label>
-                        <input type="file" name="imagen" accept=".png, .webp, .jpg ">  <!--podemos agregar multiple en vez de accept para aceptar multiples archivos-->
+                        <label for="image">image</label>
+                        <input type="file" name="image" accept=".png, .webp, .jpg ">  <!--podemos agregar multiple en vez de accept para aceptar multiples archivos-->
                     </div>
                     <div class="campo">
-                        <label for="tipoRed">Red</label>
-                        <select name="tipoRed">
+                        <label for="editorials_idEditorial">Red</label>
+                        <select name="editorials_idEditorial">
                             <option disabled selected>--Seleccionar--</option>
                             <% for(red of redes){%> 
                                 <option value="<%= red%>"><%=red%></option>
@@ -30,8 +30,8 @@
                         </select>
                     </div>
                     <div class="campo">
-                        <label for="categoria">Categoría</label>
-                        <select name="categoria">
+                        <label for="categories_idCategory">Categoría</label>
+                        <select name="categories_idCategory">
                             <option disabled selected>--Seleccionar--</option>
                             <% for(categoria of categorias){%> 
                                 <option value="<%= categoria%>"><%=categoria%></option>
@@ -40,8 +40,8 @@
                             </select>
                     </div>
                     <div class="campo">
-                        <label for="precio">Precio</label>
-                        <input type="number" name="precio" min="0">
+                        <label for="price">Precio</label>
+                        <input type="number" name="price" min="0">
                     </div>
                     <div class="contenedor-btn ">
                         <button type="submit" class="btn">Crear producto</button>

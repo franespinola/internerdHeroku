@@ -8,7 +8,7 @@ const usersFilePath = path.resolve(__dirname, "../data/users.json");
 console.log(__dirname)
 const users = JSON.parse(fs.readFileSync(usersFilePath, "utf-8"));
 
-const User=require("../models/User");
+const User=require("../models/userMethod");
 
 
 

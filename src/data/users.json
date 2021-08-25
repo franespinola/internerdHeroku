@@ -5,8 +5,18 @@
   "apellido": "Messi",
   "email": "messi@hotmail.com",
   "contrasena": "$2a$10$kij9YOQ618uv8IJM7pf1OuFIdPzJLBz4ocW12tSVAIatdZBUjtQ3S",
-  "confirmacion": "$2a$10$EssDsJi5vzroOxLuOeiaZOa.VENnUIGD3pItmxpiorY9eMgfzdVq2",           
-  "pageTitle": "Registro",  
+  "confirmacion": "$2a$10$EssDsJi5vzroOxLuOeiaZOa.VENnUIGD3pItmxpiorY9eMgfzdVq2",
+  "pageTitle": "Registro",
   "avatar": "1626795883974.jpg"
+ },
+ {
+  "id": 2,
+  "nombre": "Carlitos",
+  "apellido": "Bala",
+  "email": "carlitos123@hotmail.com",
+  "contrasena": "$2a$10$N3JzNmU9MC0plvvkvsINZuvgBLg9ervBQY7ZsXJ25Y6ZSAbHhpEka",
+  "confirmacion": "$2a$10$bXQCOpvCmhXvVq1hUeh8w.7ItlZczuFBgqj3G0bZLRrp3AMRI8Zdu",
+  "pageTitle": "Registro",
+  "avatar": "1626825902359.png"
  }
 ]

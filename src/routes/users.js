@@ -33,7 +33,11 @@ const validationForm=[
     body('contrasena_Ant').isLength({min:5,max:15}).withMessage('*Ingrese contraseña válida'),
     body('confirmacion').isLength({min:5,max:15}).withMessage('*Ingrese contraseña válida'),
     body('confirmacion2').isLength({min:5,max:15}).withMessage('*Ingrese contraseña válida'),
-    
+    body('cp').isNumeric().withMessage('*Ingrese un codigo postal válido'),
+    body('telefono')
+        .notEmpty().withMessage('*El numero de telefono debe ser obligatorio').bail()
+        .isNumeric().withMessage('*DEBE SER NUMERICO'),
+    body('cp').isPostalCode().withMessage('*Ingrese un codigo postal válido'),   
 ]
 //Validacion para el registro hacer lo mismo q con multer crear archivo en middleware de validacion y luego requerirlo aca//
 const validationFormSignUp=[
