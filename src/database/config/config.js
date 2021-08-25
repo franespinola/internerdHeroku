@@ -29,7 +29,7 @@ module.exports={
     "password": "kike5829",
     "database": "franespinola_internerd",
     "host": "mysql-franespinola.alwaysdata.net",
-    "dialect": "mysql"
+    "dialect": "mysql",
     "port": "3306"
   }*/
 }
