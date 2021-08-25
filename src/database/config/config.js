@@ -1,4 +1,7 @@
-require('dotenv').config()
+const path = require('path')
+
+require('dotenv').config({path:'E:/digital house proyectos varios/internerdHeroku/.env'})
+
 module.exports={
   /*"development": {
     "username": "root",
@@ -16,13 +19,13 @@ module.exports={
     "port":process.env.DB_PORT
   },
 
-  "test": {
+  /*"test": {
     "username": "root",
     "password": null,
     "database": "database_test",
     "host": "127.0.0.1",
     "dialect": "mysql"
-  },
+  },*/
   
   /*"production": {
     "username": "241517",
