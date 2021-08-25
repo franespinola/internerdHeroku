@@ -1,5 +1,5 @@
 const path = require('path')
-
+//require('dotenv').config({path:path.resolve(__dirname,'../../../.env')}) forma mas optima
 require('dotenv').config({path:'E:/digital house proyectos varios/internerdHeroku/.env'})
 
 module.exports={
