@@ -1,6 +1,20 @@
 
 const db = require('../database/models');
-
+const redes = [
+    [1,'Marvel'],
+    [2,'DC'],
+    [3,'Harry Potter'],
+    [4,'Star Wars'],
+    [5,'Simpsons']
+],
+categorias = [
+    [1,'Libros'],
+    [2,'Cómics'],
+    [3,'Escritorio'],
+    [4,'Ropa'],
+    [5,'Coleccionable'],
+    [6,'Otros']
+]
 
 const productsController = {
     detail: (req, res) => {
@@ -25,31 +39,31 @@ const productsController = {
         });
     },
     category: (req, res) => {
-        let idCateogory=0;
+        let idCategory=0;
         switch (req.params.categoryName){
             case "books":
-                idCateogory=1;
+                idCategory=1;
                 break;
             case "comics":
-                idCateogory=2;
+                idCategory=2;
                 break;
             case "escritorio":
-                idCateogory=3;
+                idCategory=3;
                 break;
             case "ropa":
-                idCateogory=4;
+                idCategory=4;
                 break;
             case "coleccionable":
-                idCateogory=5;
+                idCategory=5;
                 break;
             case "otros":
-                idCateogory=6;
+                idCategory=6;
                 break;
         }
 
         db.Product.findAll({
             include:[{association:"editorials"},{association:"categories"}],
-            where:{categories_idCategory:idCateogory}
+            where:{categories_idCategory:idCategory}
         })
         .then((listado)=>{
             res.render('products/category/category', {
