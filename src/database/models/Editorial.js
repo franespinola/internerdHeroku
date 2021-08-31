@@ -6,7 +6,7 @@ module.exports=(sequelize,dataTypes) => {
             primaryKey:true,
             autoIncrement:true
         },
-        name:{
+        editorial_name:{
             type:dataTypes.STRING,
             allowNull: false
         }
@@ -21,7 +21,7 @@ module.exports=(sequelize,dataTypes) => {
     Editorial.associate=(models)=>{
     Editorial.hasMany(models.Product,{
         as:'products',
-        foreignKey:'editorial_idEditorial'
+        foreignKey:'editorials_idEditorial'
         })
     
     }

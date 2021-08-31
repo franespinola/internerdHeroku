@@ -7,7 +7,13 @@ const op=db.Sequelize.Op
         })
       .then((resultado)=>{
         console.log(resultado)
-      })
-    }
+      }),
+    products:db.Category.findAll({
+        include:[{association:"products"}],
+    })
+      .then((resultado)=>{
+        console.log(resultado)
+    })
+  }
     
-cardsController.lista
+cardsController.products

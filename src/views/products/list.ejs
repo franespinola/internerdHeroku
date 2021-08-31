@@ -5,8 +5,8 @@
     <body>
         <%- include('../partials/header')%>
             <div class="products-container section">
-                <%products.forEach(product=>{%>
-                    <div class="product-card" data-id="<%= product.id%>">
+                <%listado.forEach(product=>{%>
+                    <div class="product-card" data-id="<%= product.idProduct%>">
                         <h3>
                             <%= product.name%>
                         </h3>

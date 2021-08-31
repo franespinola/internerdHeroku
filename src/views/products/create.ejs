@@ -24,7 +24,7 @@
                         <select name="editorials_idEditorial">
                             <option disabled selected>--Seleccionar--</option>
                             <% for(red of redes){%> 
-                                <option value="<%= red%>"><%=red%></option>
+                                <option value="<%= red[0]%>"><%=red[1]%></option>
                                 <% } %> 
                                 <option value="Otra">Otra</option>
                         </select>
@@ -34,7 +34,7 @@
                         <select name="categories_idCategory">
                             <option disabled selected>--Seleccionar--</option>
                             <% for(categoria of categorias){%> 
-                                <option value="<%= categoria%>"><%=categoria%></option>
+                                <option value="<%= categoria[0]%>"><%=categoria[1]%></option>
                                 <% } %> 
                                 <option value="Otra">Otra</option>
                             </select>

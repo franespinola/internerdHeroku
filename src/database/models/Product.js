@@ -6,6 +6,10 @@ module.exports=(sequelize, dataTypes) => {
             primaryKey:true,
             autoIncrement:true
         },
+        name:{
+            type: dataTypes.STRING,
+            allowNull: false
+        },
         description:{
             type: dataTypes.STRING,
             allowNull: false
@@ -18,11 +22,11 @@ module.exports=(sequelize, dataTypes) => {
             type: dataTypes.STRING,
             allowNull: false
         },
-        Editorials_idEditorial:{
+        editorials_idEditorial:{
             type: dataTypes.INTEGER,
             allowNull: false
         },
-        Categories_idCategory:{
+        categories_idCategory:{
             type: dataTypes.INTEGER,
             allowNull: false
         }
@@ -47,7 +51,7 @@ module.exports=(sequelize, dataTypes) => {
         }),
         Product.belongsTo(models.Editorial,{
             as:'editorials',
-            foreignKey:'editorial_idEditorial'
+            foreignKey:'editorials_idEditorial'
         })
     }
     return Product;

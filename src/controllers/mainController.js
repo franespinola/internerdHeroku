@@ -37,21 +37,7 @@ const main = {
             pageTitle: 'Signup'
         });
     },
-    pageNav: (req, res) => {
-        const optionsInNav = [
-            'libros',
-            'comics',
-            'escritorio',
-            'ropa',
-            'coleccionable',
-            'otros'
-        ]
-        if (optionsInNav.some(option => option === req.params.nav)) {
-            res.render('pageNav', { pageTitle: req.params.nav })
-        } else {
-            res.send('404');
-        }
-    }
+   
 }
 
 module.exports = main;

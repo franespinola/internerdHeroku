@@ -21,7 +21,7 @@ app.set('view engine', 'ejs');
 app.set('views','./src/views');
 app.use(methodOverride('_method'));
 app.use(methodOverride('_METHOD'));
-app.use('', mainRoutes);
+app.use('/', mainRoutes);
 app.use('/users', usersRoutes);
 app.use('/products', productsRoutes);
 
