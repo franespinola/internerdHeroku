@@ -39,7 +39,7 @@ const productsController = {
         });
     },
     category: (req, res) => {
-        let idCategory=0;
+       
         switch (req.params.categoryName){
             case "books":
                 idCategory=1;
@@ -133,7 +133,12 @@ const productsController = {
                     res.send('404');
             }
         })
+    },
+    deleteProduct:(req,res)=>{
+       
+        res.send('llegaste bebe')
     }
+    
 }
 
 module.exports = productsController;
