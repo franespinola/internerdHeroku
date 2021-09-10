@@ -9,7 +9,9 @@ name.addEventListener("keyup",()=>
     }
 })*/
 
-const userName= document.getElementsByName("nombre")[0];
+/*const { not } = require("sequelize/types/lib/operators");*/
+
+/*const userName= document.getElementsByName("nombre")[0];
 const button=document.getElementsByClassName("btn")[0];
 const input=document.getElementsByClassName("campo")[0];
 const campo=document.getElementsByClassName("campo");
@@ -30,7 +32,54 @@ for(let indice=0;indice<campo.length;indice++)
             button.style.backgroundColor="#d00000";
         }
     })
+}*/
+
+
+const signupForm = document.getElementById("signup");
+signupForm.addEventListener("submit", function(event){
+event.preventDefault();
+const name = document.getElementById("name");
+const lastName = document.getElementById("lastName");
+const password = document.getElementById("password");
+const confirmPassword = document.getElementById("confirmPassword");
+const email = document.getElementById("email");
+let errors = false;
+if (password.value != confirmPassword.value) {
+    document.getElementById("errorPassword").innerHTML="Las contraseñas deben coincidir !!!"; 
+    
+    errors = true;  
+}else{
+    document.getElementById("errorPassword").innerHTML=""; 
 }
+if(/[^A-Za-z]+/g.test(name.value)){
+    document.getElementById("errorName").innerHTML="El nombre no debe contener carácteres numéricos!!!"; 
+    errors = true;
+}else{
+    document.getElementById("errorName").innerHTML=""; 
+}
+if(/[^A-Za-z]+/g.test(lastName.value)){
+    document.getElementById("errorLastName").innerHTML="El apellido no debe contener carácteres numéricos!!!"; 
+    errors = true;
+}else{
+    document.getElementById("errorLastName").innerHTML=""; 
+}
+
+if(/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(email.value)){
+    document.getElementById("errorEmail").innerHTML=""; 
+    errors = true;
+}else{
+    
+    document.getElementById("errorEmail").innerHTML="Por favor ingrese un email válido.";
+}
+
+if( errors ) {
+   return; 
+}
+
+});
+
+
+
 
 /*userName.addEventListener("keyup",()=>
 {
