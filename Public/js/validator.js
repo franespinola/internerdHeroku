@@ -34,6 +34,7 @@ for(let indice=0;indice<campo.length;indice++)
     })
 }*/
 
+/*VALIDACIÓN FORMULARIO REGISTRO*/
 
 const signupForm = document.getElementById("signup");
 signupForm.addEventListener("submit", function(event){
@@ -78,6 +79,36 @@ if( errors ) {
 
 });
 
+/*VALIDACIÓN FORMULARIO LOGIN : SIN TERMINAR - NO FUNCIONA 14/09*/
+
+const loginForm = document.getElementById("login");
+loginForm.addEventListener("submit", function(event){
+event.preventDefault();
+const email = document.getElementById("email");
+const pass = document.getElementById("pass");
+
+let errors = false;
+if (password.value != confirmPassword.value) {
+    document.getElementById("errorPass").innerHTML="Las contraseñas deben coincidir !!!"; 
+    
+    errors = true;  
+}else{
+    document.getElementById("errorPass").innerHTML=""; 
+}
+
+if(/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(email.value)){
+    document.getElementById("errorCorreo").innerHTML=""; 
+    errors = true;
+}else{
+    
+    document.getElementById("errorCorreo").innerHTML="Por favor ingrese un email válido.";
+}
+
+if( errors ) {
+   return; 
+}
+
+});
 
 
 
