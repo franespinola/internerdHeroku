@@ -2,6 +2,7 @@
 
 /*VALIDACIÓN FORMULARIO REGISTRO*/
 const urlPosition = document.URL.split("/").slice(-1)[0];
+var regularEmail= /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
 
 switch(urlPosition)
 {
@@ -11,14 +12,16 @@ switch(urlPosition)
             event.preventDefault();
             const email = document.getElementById("email");
             const pass = document.getElementById("pass");
-            if(/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(email.value)){
-                document.getElementById("email").innerHTML=""; 
+            console.log(regularEmail.test(email.value))
+            if(regularEmail.test(email.value)){
+                document.getElementById("errorCorreo").innerHTML=""; 
             }else{
-                
                 document.getElementById("errorCorreo").innerHTML="Por favor ingrese un email válido.";
             }
             if(!pass.value){
                 document.getElementById("errorPass").innerHTML="ingrese contraseña"; 
+            }else{
+                document.getElementById("errorPass").innerHTML="";
             }
 
         })
@@ -31,7 +34,7 @@ switch(urlPosition)
         const lastName = document.getElementById("lastName");
         const password = document.getElementById("password");
         const confirmPassword = document.getElementById("confirmPassword");
-        const email = document.getElementById("email");
+        
         let errors = false;
         if (password.value != confirmPassword.value) {
             document.getElementById("errorPassword").innerHTML="Las contraseñas deben coincidir !!!"; 
@@ -53,7 +56,7 @@ switch(urlPosition)
             document.getElementById("errorLastName").innerHTML=""; 
         }
         
-        if(/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(email.value)){
+        if(regularEmail.test(email.value)){
             document.getElementById("errorEmail").innerHTML=""; 
             errors = true;
         }else{
@@ -67,6 +70,15 @@ switch(urlPosition)
         
         });
         break;
+    
+        /*case "create":
+            const createProduct = document.getElementById("signup");
+            createProduct.addEventListener("submit", function(event){
+            event.preventDefault();
+            const formName= document.getElementById("name")
+
+        });
+        break;*/
 }
 
 
