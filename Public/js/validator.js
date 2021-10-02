@@ -3,33 +3,38 @@
 /*VALIDACIÓN FORMULARIO REGISTRO*/
 const urlPosition = document.URL.split("/").slice(-1)[0];
 var regularEmail= /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-
+debugger
 switch(urlPosition)
 {
     case "login":
         const loginForm = document.getElementById("login");
         loginForm.addEventListener("submit", function(event){
-            event.preventDefault();
+            let errors=false;
             const email = document.getElementById("email");
             const pass = document.getElementById("pass");
             console.log(regularEmail.test(email.value))
             if(regularEmail.test(email.value)){
-                document.getElementById("errorCorreo").innerHTML=""; 
+                document.getElementById("errorCorreo").innerHTML="";
+              
             }else{
                 document.getElementById("errorCorreo").innerHTML="Por favor ingrese un email válido.";
+                errors = true;
             }
             if(!pass.value){
                 document.getElementById("errorPass").innerHTML="ingrese contraseña"; 
+                errors = true; 
             }else{
                 document.getElementById("errorPass").innerHTML="";
             }
-
+            if(errors){
+                event.preventDefault();  
+            }
         })
         break;
     case "signup":
         const signupForm = document.getElementById("signup");
         signupForm.addEventListener("submit", function(event){
-        event.preventDefault();
+        
         const name = document.getElementById("name");
         const lastName = document.getElementById("lastName");
         const password = document.getElementById("password");
@@ -40,6 +45,7 @@ switch(urlPosition)
             document.getElementById("errorPassword").innerHTML="Las contraseñas deben coincidir !!!"; 
             
             errors = true;  
+            
         }else{
             document.getElementById("errorPassword").innerHTML=""; 
         }
@@ -58,14 +64,15 @@ switch(urlPosition)
         
         if(regularEmail.test(email.value)){
             document.getElementById("errorEmail").innerHTML=""; 
-            errors = true;
+        
         }else{
             
             document.getElementById("errorEmail").innerHTML="Por favor ingrese un email válido.";
+            errors = true;
         }
-        
+        console.log(errors)
         if( errors ) {
-            return; 
+            event.preventDefault() 
         }
         
         });

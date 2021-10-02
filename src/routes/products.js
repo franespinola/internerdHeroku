@@ -1,7 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const multer=require('multer');
-const path=require('path')
+const path=require('path');
+const adminMiddleware = require('../middlewares/adminMiddleware')
 
 //configuracion disco almacenamiento multer//
 const multerDS = multer.diskStorage({
@@ -17,7 +18,7 @@ const uploadFile=multer({storage:multerDS});
 
 const productsController = require('../controllers/productsController');
 router.get('/detail/:id?', productsController.detail);
-router.get('/create', productsController.create);
+router.get('/create',adminMiddleware,productsController.create);
 router.get('/edit/:id', productsController.edit);
 router.get('/category/:categoryName', productsController.category);
 router.get('/wires/:wireName', productsController.wires);

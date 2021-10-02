@@ -36,11 +36,11 @@ module.exports=(sequelize, dataTypes) => {
         },
         address:{
             type: dataTypes.STRING,
-            allowNull: false
+            allowNull: true
         },
         user_phone:{
             type: dataTypes.INTEGER,
-            allowNull: false
+            allowNull: true
         }
     }
     let config = {

@@ -13,9 +13,9 @@
                             <h3>Dirección: <%= //usuario.direccion%></h3>
                             <h3>Teléfono: <%= //usuario.telefono%></h3>
                             <h3>Codigo Postal: <%= //usuario.codigoPostal%></h3> -->
-                            <h1>Nombre de usuario <%= user.nombre%> <%= user.apellido%></h1>
-                            <img src="/Public/img/users_img/<%=user.avatar%>">
-                            <h1>Correo electronico <%= user.email%></h1>
+                            <h1>Nombre de usuario <%= user.user_name%> <%= user.last_name%></h1>
+                            <img src="<%=user.avatar%>">
+                            <h1>Correo electronico <%= user.user_email%></h1>
                             <a href="/users/logout" class="cuenta">
                                 <button class="btn">Cerrar sesion</button>
                             </a>

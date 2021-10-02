@@ -9,22 +9,24 @@ const APIController = {
         });
     },
     products: (req, res) => {
-        const result = {};
+        //const result = {};
 
         db.Product.count({
             include:[{association:"editorials"}, {association:"categories"}],
         })
         .then((count)=>{
             result.count = count;
+            
         });
 
         db.Product.findAll({
             include:[{association:"editorials"}, {association:"categories"}],
         })
         .then((listado)=>{
-            result.data = listado;
+            //result.data = listado;
+            res.send(listado);
         });
-        return res.json(result);
+       
     }
 }
 

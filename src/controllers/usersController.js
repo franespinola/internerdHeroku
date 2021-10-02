@@ -4,12 +4,10 @@ const { validationResult } = require("express-validator");
 const fs = require("fs");
 const path = require("path");
 
-const usersFilePath = path.resolve(__dirname, "../data/users.json");
-console.log(__dirname)
-const users = JSON.parse(fs.readFileSync(usersFilePath, "utf-8"));
 
-const User=require("../models/userMethod");
 
+//const User=require("../models/userMethod");
+const db = require('../database/models');
 
 
 const toThousand = (n) => n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
@@ -30,7 +28,6 @@ const usersController = {
     res.render("users/profile", {
       pageTitle: "Perfil",
       id: req.params.id,
-      usuario: users.find(x => x.id== req.params.id),
       user:req.session.userLogged
 
     });
@@ -59,7 +56,7 @@ const usersController = {
       return res.redirect("/")
     }
   },
-  signupPost: (req, res) => {
+  signupPost: async(req, res) => {
     const resultValidation = validationResult(req);
     //console.log(resultValidation)
     if (resultValidation.errors.length > 0) {
@@ -69,7 +66,7 @@ const usersController = {
         oldData: req.body
       });
       }
-    let userInDB=User.findByField('email',req.body.email);
+    let userInDB=await db.User.findOne({ where: { user_email: req.body.email } }); //hacer cambios aca
     if(userInDB){
       return res.render("users/signup",{
         pageTitle:"Registro",
@@ -81,19 +78,22 @@ const usersController = {
         oldData:req.body
       });
     }
-    let userToCreate={          
-      ...req.body,
-      pageTitle: "Registro",
-      avatar:req.file.filename,
-      contrasena:bcryptjs.hashSync(req.body.contrasena,10),
-      confirmacion:bcryptjs.hashSync(req.body.confirmacion,10)
-
-    }
-    let userCreated=User.create(userToCreate);    
+    let nombreImagen="/public/img/users_img/"+req.file.filename
+    db.User.create({
+      user_name:req.body.nombre,
+      password:bcryptjs.hashSync(req.body.contrasena,10),
+      user_email:req.body.email,
+      user_type:0,
+      first_name:req.body.nombre,
+      last_name:req.body.apellido,
+      address:req.body.address,
+      avatar:nombreImagen
+    });
+       
     return res.redirect("/users/login")
     
   },
-  loginProcess:(req,res)=>{
+  loginProcess:async(req,res)=>{
     /*const resultValidation = validationResult(req);
     //console.log(resultValidation)
     if (resultValidation.errors.length > 0) {
@@ -105,9 +105,9 @@ const usersController = {
       }else{
         return res.send(req.body)
       }*/
-      let userToLogin=User.findByField('email',req.body.email)
+       let userToLogin=await db.User.findOne({ where: { user_email: req.body.email } });
       if(userToLogin){
-        let isOkThePassword=bcryptjs.compareSync(req.body.contrasena,userToLogin.contrasena)
+        let isOkThePassword=bcryptjs.compareSync(req.body.contrasena,userToLogin.password)
           if(isOkThePassword){
             delete userToLogin.contrasena;    //elimino la contraseña para q no me aparezca en mi profile
             req.session.userLogged=userToLogin
