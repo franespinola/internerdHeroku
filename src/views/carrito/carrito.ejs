@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('../partials/head')%>
+
+    <body>
+
+                    
+        <%- include('../partials/header')%>
+            <section class="section producto">
+                <h1>CARRITO</h1>
+                <br>
+                <table>
+                    <tr>
+                        <td>Nombre</td>
+                        <td>Precio</td>
+                    </tr> 
+                    <% total = 0 %>
+                        <%carrito.forEach(product=>{%>
+                            <% total +=  product.price %>
+                    <tr> 
+                        <td><%= product.name%></td>
+                        <td> $
+                            <%= product.price%></td>
+                    </tr>
+                        <%})%>
+                    <tr>
+                    
+                        <td>TOTAL</td>
+                        <td>$ <%= total %></td>
+                    </tr>
+                    
+                </table>
+                
+
+                
+            
+                </section>
+
+            <%- include('../partials/footer')%>
+                <script src="/public/js/app.js">
+                </script>
+    </body>
+
+</html>

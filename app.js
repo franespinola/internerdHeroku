@@ -6,6 +6,7 @@ const productsRoutes = require('./src/routes/products');
 const usersRoutes = require('./src/routes/users');
 const apiRoutes = require('./src/routes/api');
 const methodOverride=require('method-override');
+const carritoRoutes = require ('./src/routes/carrito');
 
 app.use(session({
     secret: "shhh, it's a secret",
@@ -26,6 +27,7 @@ app.use('/', mainRoutes);
 app.use('/users', usersRoutes);
 app.use('/products', productsRoutes);
 app.use('/api', apiRoutes);
+app.use('/carrito', carritoRoutes);
 
 
 
