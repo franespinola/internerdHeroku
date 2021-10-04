@@ -344,10 +344,11 @@ button {
     border-radius: 0.5rem;
     border: 1px solid black;
 }
-#avatar{
+
+#avatar {
     margin-top: 5px;
-    
 }
+
 .contenedor-btn {
     display: flex;
     flex-direction: column;
@@ -380,6 +381,16 @@ button {
 
 .cuenta button {
     width: 100%;
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type=number] {
+    -moz-appearance: textfield;
 }
 
 
@@ -614,7 +625,8 @@ select {
     .form a {
         width: 40%;
         align-self: center;
-        margin-top: -20px;  /*agregue*/
+        margin-top: -20px;
+        /*agregue*/
     }
     .form {
         align-items: center;
@@ -657,7 +669,7 @@ select {
         visibility: visible;
         height: 10rem;
     }
-    .validationProfile{
+    .validationProfile {
         font-size: 12px;
         color: rgb(134, 8, 48);
     }
@@ -669,9 +681,9 @@ select {
     }
 }
 
-form .error{
-font-size: 12px;
-color: #D00000;
+form .error {
+    font-size: 12px;
+    color: #D00000;
 }
 
 .logo-principal {
