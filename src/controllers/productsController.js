@@ -140,6 +140,9 @@ const productsController = {
             description: req.body.description,
             price: req.body.precio
         }
+        if (req.file) {
+            dataUpdated.image = req.file.filename
+        }
         if (req.body.categoria) {
             dataUpdated.categories_idCategory = Number.parseInt(req.body.categoria)
         }

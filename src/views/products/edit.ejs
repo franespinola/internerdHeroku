@@ -5,7 +5,7 @@
     <body>
         <%- include('../partials/header')%>
             <section class="section">
-                <form method="POST" action="/products/edit/<%= product.idProduct%>?_method=PUT">
+                <form method="POST" enctype="multipart/form-data" action="/products/edit/<%= product.idProduct%>?_method=PUT">
                     <div class="campo">
                         <label for="nombreProducto">Nombre de producto</label>
                         <input type="text" name="nombreProducto" value="<%= product.name%>">
@@ -18,14 +18,14 @@
                         <label for="imagen">Imagen</label>
                         <input type="file" name="imagen" accept=".png, .webp, .jpg" value="<%= product.image%>">
                     </div>
-                    <img src="<%= product.image%>" alt="Imagen producto a editar" class="img-edit">
+                    <img src="/Public/img/<%=product.image%>" alt="Imagen producto a editar" class="img-edit">
                     <div class="campo">
                         <label for="tipoRed">Red</label>
                         <select name="tipoRed">
                         <option disabled>--Seleccionar--</option>
                         <option value="<%= product.red%>" selected><%= product.red%></option>
                         <% for(red of redes){%> 
-                            <option value="<%= red[0]%>"><%=red[1]%></option>
+                            <option value="<%= red[0]%>" <%=product.editorials_idEditorial==red[0]?'selected':''%>><%=red[1]%></option>
                             <% } %> 
                     </select>
                     </div>
@@ -35,7 +35,7 @@
                         <option disabled>--Seleccionar--</option>
                         <option value="<%= product.category%>"><%= product.category%></option>
                         <% for(categoria of categorias){%> 
-                            <option value="<%= categoria[0]%>"><%=categoria[1]%></option>
+                            <option value="<%= categoria[0]%>" <%= product.categories_idCategory==categoria[0]?'selected':''%>><%=categoria[1]%></option>
                             <% } %> 
                         </select>
                     </div>
