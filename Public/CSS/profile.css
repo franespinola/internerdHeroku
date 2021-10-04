@@ -54,3 +54,27 @@ body{
 .a-negro{
     color: black !important;
 }
+
+.bg-animated {
+    background-image: url("../img/fondo.svg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    min-height: 100%;
+    background-attachment: fixed;
+}
+
+.perfil-imagen {
+    width: 138px;
+    height: 138px;
+    border-radius: 20px;
+    box-shadow: 0px 0px 20px #404040;
+}
+
+.text-profile {
+    color: #306e8d;
+    text-shadow: 1px 1px 4px #87cce7a3;
+}
+
+.shadow-card {
+    box-shadow: 0px 0px 10px red;
+}
