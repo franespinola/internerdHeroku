@@ -5,6 +5,7 @@ const path = require('path')
 const guestMiddleware = require('../middlewares/guestMiddleware')  //llamo al middleware de login y registro
 const authMiddleware = require('../middlewares/authMiddleware')  //llamo al middleware de profile
 
+
 //middleware para multer(crear archivo en carpeta multer y requerirlo en la ruta users.js)
 const multerDS = multer.diskStorage({
     destination: function(req, file, cb) {       // request, archivo y callback que almacena archivo en destino
@@ -48,6 +49,8 @@ const validationFormSignUp=[
     .isEmail().withMessage('*Ingrese un email válido'),
     body('contrasena').isLength({min:5,max:15}).withMessage('*Ingrese contraseña válida (entre 5 y 15 caracteres)'),
     body('confirmacion').isLength({min:5,max:15}).withMessage('*Ingrese contraseña válida'),
+    body('phone').isNumeric().withMessage('*Ingrese telefono valido'),
+    body('address').notEmpty().withMessage('*Ingrese direccion'),
     body('avatar').custom((value,{ req })=>{
         let file=req.file;
         let acceptedExtensions=['.png', '.webp', '.jpg'];

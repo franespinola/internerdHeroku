@@ -87,6 +87,7 @@ const usersController = {
       first_name:req.body.nombre,
       last_name:req.body.apellido,
       address:req.body.address,
+      user_phone:req.body.phone,
       avatar:nombreImagen
     });
        

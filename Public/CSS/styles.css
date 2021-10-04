@@ -32,7 +32,7 @@ body {
 
 p {
     color: black;
-    font-size: 2rem;
+    font-size: 1.4rem;
 }
 
 a {
@@ -226,7 +226,7 @@ button {
 }
 
 .iconos img {
-    max-width: 70%;
+    max-width: 20%;
 }
 
 
@@ -253,6 +253,7 @@ button {
 
 .sociales {
     order: -1;
+    width: 250px;
 }
 
 .sociales div {
@@ -683,4 +684,12 @@ select {
 form .error {
     font-size: 12px;
     color: #D00000;
+}
+
+.logo-principal {
+    width: 150px !important;
+}
+
+.icono-escudo {
+    width: 350px;
 }
