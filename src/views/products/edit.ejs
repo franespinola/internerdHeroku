@@ -5,7 +5,7 @@
     <body>
         <%- include('../partials/header')%>
             <section class="section">
-                <form method="POST" enctype="multipart/form-data" action="/products/edit/<%= product.idProduct%>?_method=PUT">
+                <form method="POST" enctype="multipart/form-data" action="/products/edit/<%= product.idProduct%>?_method=PATCH">
                     <div class="campo">
                         <label for="nombreProducto">Nombre de producto</label>
                         <input type="text" name="nombreProducto" value="<%= product.name%>">

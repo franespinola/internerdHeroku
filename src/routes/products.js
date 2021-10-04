@@ -25,7 +25,7 @@ router.get('/wires/:wireName', productsController.wires);
 router.get('/list', productsController.allProducts);
 //---POST--//
 router.post('/create', uploadFile.single('image'), productsController.createPost) //uploadFile.single('en el formulario me fijo el name q use')
-router.put('/edit/:id', uploadFile.single('imagen'), productsController.update);
+router.patch('/edit/:id', uploadFile.single('imagen'), productsController.update);
 //router.delete('/')
 router.delete('/delete/:id?', productsController.deleteProduct);
 

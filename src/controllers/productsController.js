@@ -135,24 +135,24 @@ const productsController = {
         })
     },
     update: (req, res) => {
-        const dataUpdated = {
-            name: req.body.nombreProducto,
-            description: req.body.description,
-            price: req.body.precio
-        }
-        if (req.file) {
-            dataUpdated.image = req.file.filename
-        }
-        if (req.body.categoria) {
-            dataUpdated.categories_idCategory = Number.parseInt(req.body.categoria)
-        }
-        if (req.body.tipoRed) {
-            dataUpdated.editorials_idEditorial = Number.parseInt(req.body.tipoRed);
-        }
-        db.Product.update(dataUpdated, {
-            where: { idProduct: req.params.id }
-        })
-        res.redirect('/products/edit/' + req.params.id);
+        const data = req.body;
+        db.Product.findByPk(req.params.id)
+            .then(product => {
+                const dataUpdated = {}
+                data.nombreProducto != product.name ? dataUpdated.name = data.nombreProducto : '';
+                data.description != product.description ? dataUpdated.description = data.description : '';
+                data.precio != product.price ? dataUpdated.price = parseInt(data.precio) : '';
+                data.categoria != product.categories_idCategory ? dataUpdated.categories_idCategory = data.categoria : '';
+                data.tipoRed != product.editorials_idEditorial ? dataUpdated.editorials_idEditorial = data.tipoRed : '';
+                req.file ? dataUpdated.image = req.file.filename : '';
+                return db.Product.update(dataUpdated, {
+                    where: { idProduct: req.params.id }
+                })
+            })
+            .then(response => {
+                res.redirect('/products/edit/' + req.params.id);
+            })
+            .catch(console.log);
     },
     deleteProduct: (req, res) => {
         db.Product.destroy({
