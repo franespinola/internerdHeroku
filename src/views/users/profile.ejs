@@ -1,31 +1,72 @@
 <!DOCTYPE html>
 <html lang="en">
-<%- include('../partials/head')%>
-
-    <body>
-        <%- include('../partials/header')%>        
-                <div>
-                    <div class="info">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/Public/CSS/profile.css">
+    <title>Profile</title>
+</head>
+<body>
+    <div class="container">
+        <div class="main">
+            <div class="topbar"></div>
+            <a href="/users/logout">Logout</a>
+            <a href="#">Support</a>
+            <a href="#">Work</a>
+            <a href="/users/profile">Home</a>
+        </div>
+        <div class="row">
+            <div class="col-md-4 mt-1">
+                <div class="card-text-center sidebar">
+                    <div class="card-body">
+                        <img src="<%=user.avatar%>" alt="profile image" class="rounded-circle" width="150">
+                        <div class="mt-3">
+                            <h3><%=user.user_name%></h3>
+                            <a href="/users/profile">Home</a>
+                            <a href="#">Work</a>
+                            <a href="#">Support</a>
+                            <a href="#">Setting</a>
+                        </div>
                     </div>
-                    <div>
-                        <!--<h1>Nombre de usuario <%= //usuario.nombre%> <%= //usuario.apellido%></h1>
-                            <h3>Email: <%= //usuario.email%></h3>
-                            <h3>Dirección: <%= //usuario.direccion%></h3>
-                            <h3>Teléfono: <%= //usuario.telefono%></h3>
-                            <h3>Codigo Postal: <%= //usuario.codigoPostal%></h3> -->
-                            <h1>Nombre de usuario <%= user.user_name%> <%= user.last_name%></h1>
-                            <img src="<%=user.avatar%>">
-                            <h1>Correo electronico <%= user.user_email%></h1>
-                            <a href="/users/logout" class="cuenta">
-                                <button class="btn">Cerrar sesion</button>
-                            </a>
+                </div>
+                <div class="col-md-8 mt-1">
+                    <div class="card mb-3 content">
+                        <h1 class="m-3 pt-3">About</h1>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <h5><%=user.first_name%><%=user.last_name%></h5>
+                                </div>
+                                <div class="col-md-9 text-secondary">
+                                    <%=user.user_name%>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <h5>Email</h5>
+                                </div>
+                                <div class="col-md-9 text-second">
+                                    <%=user.user_email%>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <h5>Phone</h5>
+                                </div>
+                                <div class="col-md-9 text-secondary">
+                                    <%=user.user_phone%>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                
-
-
-            <%- include('../partials/footer')%>
-                <script src="/public/js/app.js">
-                </script>
-    </body>
-
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
 </html>
