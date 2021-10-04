@@ -6,7 +6,7 @@ const carritoController = {
         productos.push(producto);
         let producto2 = {"name": "Wolverine", "price": 1950};
         productos.push(producto2);
-        res.render('carrito/carrito', {
+        res.render('carrito', {
             pageTitle: 'Carrito',
             carrito: productos
         });
