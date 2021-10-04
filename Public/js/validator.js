@@ -3,6 +3,7 @@
 /*VALIDACIÓN FORMULARIO REGISTRO*/
 const urlPosition = document.URL.split("/").slice(-1)[0];
 var regularEmail= /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+var regularPhone= /^\(?\d{2}\)?[\s\.-]?\d{4}[\s\.-]?\d{4}$/
 debugger
 switch(urlPosition)
 {
@@ -39,6 +40,8 @@ switch(urlPosition)
         const lastName = document.getElementById("lastName");
         const password = document.getElementById("password");
         const confirmPassword = document.getElementById("confirmPassword");
+        const phone=document.getElementById("phone")
+        const address=document.getElementById("address")
         
         let errors = false;
         if (password.value != confirmPassword.value) {
@@ -70,6 +73,21 @@ switch(urlPosition)
             document.getElementById("errorEmail").innerHTML="Por favor ingrese un email válido.";
             errors = true;
         }
+        if(regularPhone.test(phone.value)){
+            document.getElementById("errorPhone").innerHTML=""; 
+        
+        }else{
+            
+            document.getElementById("errorPhone").innerHTML="Por favor ingrese un telefono válido.";
+            errors = true;
+        }
+        if(!address.value){
+            document.getElementById("errorAddress").innerHTML="ingrese direccion"; 
+            errors = true; 
+        }else{
+            document.getElementById("errorAddress").innerHTML="";
+        }
+
         console.log(errors)
         if( errors ) {
             event.preventDefault() 

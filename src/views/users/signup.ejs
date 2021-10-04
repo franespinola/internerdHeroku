@@ -48,6 +48,22 @@
                         <% } %> 
                     </div>
                     <div class="campo">
+                        <label for="phone">Telefono:</label>
+                        <input id= "phone" type="number" name="phone" placeholder="telefono" value="<%=locals.oldData?oldData.phone:null%>" />
+                        <span class = "error" id = "errorPhone" ></span>
+                        <% if(locals.errors && errors.phone) {%> 
+                            <p class="validationProfile"><%= errors.phone.msg %></p> 
+                        <% } %> 
+                    </div>
+                    <div class="campo">
+                        <label for="address">Direccion:</label>
+                        <input id= "address" type="text" name="address" placeholder="address" value="<%=locals.oldData?oldData.address:null%>" />
+                        <span class = "error" id = "errorAddress" ></span>
+                        <% if(locals.errors && errors.address) {%> 
+                            <p class="validationProfile"><%= errors.address.msg %></p> 
+                        <% } %> 
+                    </div>
+                    <div class="campo">
                         <label for="avatar">Su Avatar</label>
                         <input type="file" name="avatar" accept=".gif,.jpg,.jpeg,.png" >
                         <% if(locals.errors && errors.avatar) { %>
