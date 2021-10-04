@@ -5,14 +5,14 @@
     <body>
         <%- include('../partials/header')%>
             <section class="section">
-                <form>
+                <form method="POST" action="/products/edit/<%= product.idProduct%>?_method=PUT">
                     <div class="campo">
                         <label for="nombreProducto">Nombre de producto</label>
                         <input type="text" name="nombreProducto" value="<%= product.name%>">
                     </div>
                     <div class="campo">
                         <label for="descripcion">Descripción</label>
-                        <textarea><%= product.description%></textarea>
+                        <textarea name="description"><%= product.description%></textarea>
                     </div>
                     <div class="campo">
                         <label for="imagen">Imagen</label>
@@ -25,9 +25,8 @@
                         <option disabled>--Seleccionar--</option>
                         <option value="<%= product.red%>" selected><%= product.red%></option>
                         <% for(red of redes){%> 
-                            <option value="<%= red%>"><%=red%></option>
+                            <option value="<%= red[0]%>"><%=red[1]%></option>
                             <% } %> 
-                            <option value="Otra">Otra</option>
                     </select>
                     </div>
                     <div class="campo">
@@ -36,9 +35,8 @@
                         <option disabled>--Seleccionar--</option>
                         <option value="<%= product.category%>"><%= product.category%></option>
                         <% for(categoria of categorias){%> 
-                            <option value="<%= categoria%>"><%=categoria%></option>
+                            <option value="<%= categoria[0]%>"><%=categoria[1]%></option>
                             <% } %> 
-                            <option value="Otra">Otra</option>
                         </select>
                     </div>
                     <div class="campo">

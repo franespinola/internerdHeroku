@@ -1,20 +1,20 @@
-
 const db = require('../database/models');
 const redes = [
-    [1,'Marvel'],
-    [2,'DC'],
-    [3,'Harry Potter'],
-    [4,'Star Wars'],
-    [5,'Simpsons']
-],
-categorias = [
-    [1,'Libros'],
-    [2,'Cómics'],
-    [3,'Escritorio'],
-    [4,'Ropa'],
-    [5,'Coleccionable'],
-    [6,'Otros']
-]
+        [1, 'Marvel'],
+        [2, 'DC'],
+        [3, 'Harry Potter'],
+        [4, 'Star Wars'],
+        [5, 'Simpsons']
+    ],
+    categorias = [
+        [1, 'Libros'],
+        [2, 'Cómics'],
+        [3, 'Escritorio'],
+        [4, 'Ropa'],
+        [5, 'Coleccionable'],
+        [6, 'Otros']
+    ]
+let products;
 
 const productsController = {
     detail: (req, res) => {
@@ -30,47 +30,49 @@ const productsController = {
             categorias
         });
     },
-    edit: (req, res) => {
+    edit: async(req, res) => {
+        await db.Product.findAll()
+            .then(productsDB => products = productsDB);
         res.render('products/edit', {
             pageTitle: 'Editar',
             redes,
             categorias,
-            product: products[req.params.id]
+            product: products.filter(product => product.dataValues.idProduct == req.params.id)[0]
         });
     },
     category: (req, res) => {
-       
-        switch (req.params.categoryName){
+
+        switch (req.params.categoryName) {
             case "books":
-                idCategory=1;
+                idCategory = 1;
                 break;
             case "comics":
-                idCategory=2;
+                idCategory = 2;
                 break;
             case "escritorio":
-                idCategory=3;
+                idCategory = 3;
                 break;
             case "ropa":
-                idCategory=4;
+                idCategory = 4;
                 break;
             case "coleccionable":
-                idCategory=5;
+                idCategory = 5;
                 break;
             case "otros":
-                idCategory=6;
+                idCategory = 6;
                 break;
         }
 
         db.Product.findAll({
-            include:[{association:"editorials"},{association:"categories"}],
-            where:{categories_idCategory:idCategory}
-        })
-        .then((listado)=>{
-            res.render('products/category/category', {
-                pageTitle: 'Todos los productos',
-                listado: listado
+                include: [{ association: "editorials" }, { association: "categories" }],
+                where: { categories_idCategory: idCategory }
             })
-        })
+            .then((listado) => {
+                res.render('products/category/category', {
+                    pageTitle: 'Todos los productos',
+                    listado: listado
+                })
+            })
     },
     wires: (req, res) => {
         wire = req.params.wireName;
@@ -85,32 +87,30 @@ const productsController = {
     },
     allProducts: (req, res) => {
         db.Product.findAll({
-            include:[{association:"editorials"},{association:"categories"}],
-            
-        })
-        .then((listado)=>{
-            res.render('products/list', {
-                pageTitle: 'Todos los productos',
-                listado: listado
-               
+                include: [{ association: "editorials" }, { association: "categories" }],
+
             })
-           
-        })
+            .then((listado) => {
+                res.render('products/list', {
+                    pageTitle: 'Todos los productos',
+                    listado: listado
+
+                })
+
+            })
     },
-    createPost:(req,res)=>{
-        let nombreImagen="/public/img/"+req.file.filename
-        let producto=req.body
+    createPost: (req, res) => {
+        let nombreImagen = "/public/img/" + req.file.filename
+        let producto = req.body
         db.Product.create({
-            name:producto.name,
-            description:producto.description,
-            image:nombreImagen,
-            editorials_idEditorial:producto.editorials_idEditorial,
-            categories_idCategory:producto.categories_idCategory,
-            price:producto.price
-        }).then(()=>
-        {
-            switch(producto.categories_idCategory)
-            {
+            name: producto.name,
+            description: producto.description,
+            image: nombreImagen,
+            editorials_idEditorial: producto.editorials_idEditorial,
+            categories_idCategory: producto.categories_idCategory,
+            price: producto.price
+        }).then(() => {
+            switch (producto.categories_idCategory) {
                 case '1':
                     res.redirect('/products/category/libros');
                     break;
@@ -134,11 +134,31 @@ const productsController = {
             }
         })
     },
-    deleteProduct:(req,res)=>{
-       
-        res.send('llegaste bebe')
+    update: (req, res) => {
+        const dataUpdated = {
+            name: req.body.nombreProducto,
+            description: req.body.description,
+            price: req.body.precio
+        }
+        if (req.body.categoria) {
+            dataUpdated.categories_idCategory = Number.parseInt(req.body.categoria)
+        }
+        if (req.body.tipoRed) {
+            dataUpdated.editorials_idEditorial = Number.parseInt(req.body.tipoRed);
+        }
+        db.Product.update(dataUpdated, {
+            where: { idProduct: req.params.id }
+        })
+        res.redirect('/products/edit/' + req.params.id);
+    },
+    deleteProduct: (req, res) => {
+        db.Product.destroy({
+            where: {
+                idProduct: req.params.id
+            }
+        })
+        res.redirect('/products/list');
     }
-    
 }
 
 module.exports = productsController;
