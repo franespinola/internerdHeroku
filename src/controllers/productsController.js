@@ -32,7 +32,7 @@ const productsController = {
     },
     edit: async(req, res) => {
         let product;
-        await db.Product.findByPk(req.param.id)
+        await db.Product.findByPk(req.params.id)
             .then(productDB => product = productDB);
         res.render('products/edit', {
             pageTitle: 'Editar',
