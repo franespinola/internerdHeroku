@@ -31,13 +31,14 @@ const productsController = {
         });
     },
     edit: async(req, res) => {
-        await db.Product.findAll()
-            .then(productsDB => products = productsDB);
+        let product;
+        await db.Product.findByPk(req.param.id)
+            .then(productDB => product = productDB);
         res.render('products/edit', {
             pageTitle: 'Editar',
             redes,
             categorias,
-            product: products.filter(product => product.dataValues.idProduct == req.params.id)[0]
+            product
         });
     },
     category: (req, res) => {
